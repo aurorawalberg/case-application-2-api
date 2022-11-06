@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheMovingCompanyAPI.Entities;
+using TheMovingCompanyAPI.Services;
 
 namespace TheMovingCompanyAPI.Controllers
 {
@@ -8,53 +9,18 @@ namespace TheMovingCompanyAPI.Controllers
     public class ServicesController : ControllerBase
     {
         private readonly ILogger<ServicesController> _logger;
-        public ServicesController(ILogger<ServicesController> logger)
+        private readonly IOrderService _orderService;
+
+        public ServicesController(ILogger<ServicesController> logger, IOrderService orderService)
         {
             _logger = logger;
+            _orderService = orderService;
         }
 
         [HttpGet(Name = "GetServices")]
         public IEnumerable<Service> Get()
         {
-            return new List<Service>
-            {
-                new Service
-                {
-                    OrderId = 1,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now,
-                },
-                new Service
-                {
-                    OrderId = 1,
-                    ServiceType = "Packing",
-                    Date = DateTime.Now,
-                },
-                new Service
-                {
-                    OrderId = 2,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now,
-                },
-                new Service
-                {
-                    OrderId = 3,
-                    ServiceType = "Cleaning",
-                    Date = DateTime.Now,
-                },
-                new Service
-                {
-                    OrderId = 3,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now,
-                },
-                new Service
-                {
-                    OrderId = 3,
-                    ServiceType = "Cleaning",
-                    Date = DateTime.Now,
-                }
-            };
+            return _orderService.GetServices();
         }
     }
 }

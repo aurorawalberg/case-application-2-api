@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using TheMovingCompanyAPI.Entities;
+using TheMovingCompanyAPI.Models;
+using TheMovingCompanyAPI.Services;
 
 namespace TheMovingCompanyAPI.Controllers
 {
@@ -8,67 +11,39 @@ namespace TheMovingCompanyAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly ILogger<OrdersController> _logger;
-        public OrdersController(ILogger<OrdersController> logger)
+        private readonly IOrderService _orderService;
+
+        public OrdersController(ILogger<OrdersController> logger, IOrderService orderService)
         {
             _logger = logger;
+            _orderService = orderService;
         }
 
         [HttpGet(Name = "GetOrders")]
         public IEnumerable<Order> Get()
         {
-            return new List<Order>
-            {
-                new Order
-                {
-                    OrderId = 1,
-                    CustomerId = 1,
-                    FromAdress = "123 Main St",
-                    ToAdress = "456 Main St",
-                    Note = "This is a note",
-                },
-                new Order
-                {
-                    OrderId = 2,
-                    CustomerId = 1,
-                    FromAdress = "123 Second St",
-                    ToAdress = "456 Second St",
-                    Note = "This is a note",
-                },
-                new Order
-                {
-                    OrderId = 3,
-                    CustomerId = 2,
-                    FromAdress = "123 Third St",
-                    ToAdress = "456 Third St",
-                    Note = "This is a note",
-                },
-                new Order
-                {
-                    OrderId = 4,
-                    CustomerId = 3,
-                    FromAdress = "123 Last St",
-                    ToAdress = "456 Last St",
-                    Note = "This is a note",
-                }
-            };
+            return _orderService.GetOrders();
         }
 
-        [HttpPost("{id}", Name = "CreateOrder")]
-        public void Post([FromBody] string value)
+        [HttpPost(Name = "CreateOrder")]
+        public OkObjectResult Post([FromBody] OrderRequest body)
         {
-
+            _orderService.ProccessCreateOrderRequest(body);
+            return Ok(new { message = "Order created" });
         }
 
         [HttpPut("{id}", Name = "UpdateOrder")]
-        public void Put(int id, [FromBody] string value)
+        public OkObjectResult Put(int id, [FromBody] OrderRequest body)
         {
-
+            _orderService.ProccessUpdateOrderRequest(body);
+            return Ok(new { message = "Order updated" });
         }
 
         [HttpDelete("{id}", Name = "DeleteOrder")]
-        public void Delete(int id)
+        public OkObjectResult Delete(int id)
         {
-
+            _orderService.ProccessDeleteOrderRequest(id);
+            return Ok(new { message = "Order deleted" });
         }
     }
 }

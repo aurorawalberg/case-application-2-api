@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheMovingCompanyAPI.Entities;
+using TheMovingCompanyAPI.Services;
 
 namespace TheMovingCompanyAPI.Controllers
 {
@@ -8,32 +9,17 @@ namespace TheMovingCompanyAPI.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ILogger<CustomersController> _logger;
-        public CustomersController(ILogger<CustomersController> logger)
+        private readonly IOrderService _orderService;
+        public CustomersController(ILogger<CustomersController> logger, IOrderService orderService)
         {
             _logger = logger;
+            _orderService = orderService;
         }
 
         [HttpGet(Name = "GetCustomers")]
         public IEnumerable<Customer> Get()
         {
-            return new List<Customer>
-            {
-                new Customer
-                {
-                    CustomerId = 1,
-                    Name = "John Smith"
-                },
-                new Customer
-                {
-                    CustomerId = 2,
-                    Name = "John Andrews"
-                },
-                new Customer
-                {
-                    CustomerId = 3,
-                    Name = "John Kelly"
-                }
-            };
+            return _orderService.GetCustomers();
         }
     }
 }
