@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheMovingCompanyAPI.Models;
+using TheMovingCompanyAPI.Entities;
 
 namespace TheMovingCompanyAPI.Controllers
 {
@@ -14,41 +14,41 @@ namespace TheMovingCompanyAPI.Controllers
         }
 
         [HttpGet(Name = "GetServices")]
-        public IEnumerable<ServiceEntity> Get()
+        public IEnumerable<Service> Get()
         {
-            return new List<ServiceEntity>
+            return new List<Service>
             {
-                new ServiceEntity
+                new Service
                 {
                     OrderId = 1,
                     ServiceType = "Moving",
                     Date = DateTime.Now,
                 },
-                new ServiceEntity
+                new Service
                 {
                     OrderId = 1,
                     ServiceType = "Packing",
                     Date = DateTime.Now,
                 },
-                new ServiceEntity
+                new Service
                 {
                     OrderId = 2,
                     ServiceType = "Moving",
                     Date = DateTime.Now,
                 },
-                new ServiceEntity
+                new Service
                 {
                     OrderId = 3,
                     ServiceType = "Cleaning",
                     Date = DateTime.Now,
                 },
-                new ServiceEntity
+                new Service
                 {
                     OrderId = 3,
                     ServiceType = "Moving",
                     Date = DateTime.Now,
                 },
-                new ServiceEntity
+                new Service
                 {
                     OrderId = 3,
                     ServiceType = "Cleaning",

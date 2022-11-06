@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheMovingCompanyAPI.Models;
+using TheMovingCompanyAPI.Entities;
 
 namespace TheMovingCompanyAPI.Controllers
 {
@@ -14,11 +14,11 @@ namespace TheMovingCompanyAPI.Controllers
         }
 
         [HttpGet(Name = "GetOrders")]
-        public IEnumerable<OrderEntity> Get()
+        public IEnumerable<Order> Get()
         {
-            return new List<OrderEntity>
+            return new List<Order>
             {
-                new OrderEntity
+                new Order
                 {
                     OrderId = 1,
                     CustomerId = 1,
@@ -26,7 +26,7 @@ namespace TheMovingCompanyAPI.Controllers
                     ToAdress = "456 Main St",
                     Note = "This is a note",
                 },
-                new OrderEntity
+                new Order
                 {
                     OrderId = 2,
                     CustomerId = 1,
@@ -34,7 +34,7 @@ namespace TheMovingCompanyAPI.Controllers
                     ToAdress = "456 Second St",
                     Note = "This is a note",
                 },
-                new OrderEntity
+                new Order
                 {
                     OrderId = 3,
                     CustomerId = 2,
@@ -42,7 +42,7 @@ namespace TheMovingCompanyAPI.Controllers
                     ToAdress = "456 Third St",
                     Note = "This is a note",
                 },
-                new OrderEntity
+                new Order
                 {
                     OrderId = 4,
                     CustomerId = 3,

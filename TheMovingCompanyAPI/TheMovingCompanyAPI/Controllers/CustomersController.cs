@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheMovingCompanyAPI.Models;
+using TheMovingCompanyAPI.Entities;
 
 namespace TheMovingCompanyAPI.Controllers
 {
@@ -14,21 +14,21 @@ namespace TheMovingCompanyAPI.Controllers
         }
 
         [HttpGet(Name = "GetCustomers")]
-        public IEnumerable<CustomerEntity> Get()
+        public IEnumerable<Customer> Get()
         {
-            return new List<CustomerEntity>
+            return new List<Customer>
             {
-                new CustomerEntity
+                new Customer
                 {
                     CustomerId = 1,
                     Name = "John Smith"
                 },
-                new CustomerEntity
+                new Customer
                 {
                     CustomerId = 2,
                     Name = "John Andrews"
                 },
-                new CustomerEntity
+                new Customer
                 {
                     CustomerId = 3,
                     Name = "John Kelly"

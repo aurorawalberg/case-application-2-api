@@ -1,6 +1,6 @@
-﻿namespace TheMovingCompanyAPI.Models
+﻿namespace TheMovingCompanyAPI.Entities
 {
-    public class ServiceEntity
+    public class Service
     {
         public int OrderId { get; set; }
         public string ServiceType { get; set; }
