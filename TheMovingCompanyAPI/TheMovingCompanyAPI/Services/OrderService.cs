@@ -141,6 +141,7 @@ namespace TheMovingCompanyAPI.Services
         public void ProccessCreateOrderRequest(OrderRequest orderRequest)
         {
             CreateOrder(orderRequest.Order);
+            CreateCustomer(orderRequest.Customer);
             orderRequest.Services.ForEach(service =>
             {
                 CreateService(service);
@@ -150,6 +151,8 @@ namespace TheMovingCompanyAPI.Services
         public void ProccessUpdateOrderRequest(OrderRequest orderRequest)
         {
             UpdateOrder(orderRequest.Order);
+            UpdateCustomer(orderRequest.Customer);
+
             orderRequest.Services.ForEach(service =>
             {
                 UpdateService(service);
@@ -159,6 +162,7 @@ namespace TheMovingCompanyAPI.Services
         public void ProccessDeleteOrderRequest(int orderId)
         {
             DeleteOrder(orderId);
+            DeleteCustomer(orderId);
             DeleteService(orderId);
         }
 
@@ -174,11 +178,23 @@ namespace TheMovingCompanyAPI.Services
             _services.Add(service);
         }
 
+        private void CreateCustomer(Customer customer)
+        {
+            _customers.Add(customer);
+        }
+
         private void UpdateOrder(Order order)
         {
             var orderToUpdate = _orders.Find(o => o.OrderId == order.OrderId);
             DeleteOrder(order.OrderId);
             CreateOrder(order);
+        }
+
+        private void UpdateCustomer(Customer customer)
+        {
+            var customerToUpdate = _customers.Find(o => o.CustomerId == customer.CustomerId);
+            DeleteCustomer(customer.CustomerId);
+            CreateCustomer(customer);
         }
 
         private void UpdateService(Service service)
@@ -192,6 +208,12 @@ namespace TheMovingCompanyAPI.Services
         {
             var order = _orders.Find(o => o.OrderId == orderId);
             _orders.Remove(order);
+        }
+
+        private void DeleteCustomer(int customerId)
+        {
+            var customer = _customers.Find(s => s.CustomerId == customerId);
+            _customers.Remove(customer);
         }
 
         private void DeleteService(int orderId)
