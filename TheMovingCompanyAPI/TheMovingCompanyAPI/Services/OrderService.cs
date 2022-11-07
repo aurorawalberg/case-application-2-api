@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheMovingCompanyAPI.Entities;
 using TheMovingCompanyAPI.Helpers;
+using TheMovingCompanyAPI.MockData;
 using TheMovingCompanyAPI.Models;
 
 namespace TheMovingCompanyAPI.Services
@@ -9,6 +10,7 @@ namespace TheMovingCompanyAPI.Services
     {
         private readonly ILogger<OrderService> _logger;
         private readonly DataContext _context;
+        private readonly MockOrderData _mockData = new();
 
         public OrderService(ILogger<OrderService> logger, DataContext context)
         {
@@ -18,17 +20,20 @@ namespace TheMovingCompanyAPI.Services
 
         public IEnumerable<Order> GetOrders()
         {
-            return _context.Orders;
+            //return _context.Customers;
+            return _mockData.GetOrders();
         }
 
         public IEnumerable<Customer> GetCustomers()
         {
-            return _context.Customers;
+            //return _context.Customers;
+            return _mockData.GetCustomers();
         }
 
         public IEnumerable<Service> GetServices()
         {
-            return _context.Services;
+            //return _context.Services;
+            return _mockData.GetServices();
         }
 
         public void CreateOrder(Order order)

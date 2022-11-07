@@ -46,42 +46,49 @@ namespace TheMovingCompanyAPI.MockData
             {
                 new Service
                 {
+                    Id = 1,
                     OrderId = 1,
                     ServiceType = "Moving",
                     Date = DateTime.Now.AddDays(2),
                 },
                 new Service
                 {
+                    Id = 2,
                     OrderId = 1,
                     ServiceType = "Packing",
                     Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
+                    Id = 3,
                     OrderId = 2,
                     ServiceType = "Moving",
                     Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
+                    Id = 4,
                     OrderId = 3,
                     ServiceType = "Cleaning",
                     Date = DateTime.Now.AddDays(3),
                 },
                 new Service
                 {
+                    Id = 5,
                     OrderId = 3,
                     ServiceType = "Moving",
                     Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
+                    Id = 6,
                     OrderId = 3,
                     ServiceType = "Packing",
                     Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
+                    Id = 7,
                     OrderId = 4,
                     ServiceType = "Moving",
                     Date = DateTime.Now.AddDays(4),
@@ -118,5 +125,20 @@ namespace TheMovingCompanyAPI.MockData
                     PhoneNumber = "+90 76732648"
                 }
             };
+
+        public List<Customer> GetCustomers()
+        {
+            return _customers;
+        }
+
+        public List<Order> GetOrders()
+        {
+            return _orders;
+        }
+
+        public List<Service> GetServices()
+        {
+            return _services;
+        }
     }
 }
