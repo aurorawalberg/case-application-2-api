@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheMovingCompanyAPI.Entities;
+using TheMovingCompanyAPI.MockData;
 using TheMovingCompanyAPI.Models;
 using TheMovingCompanyAPI.Services;
 
@@ -11,6 +12,8 @@ namespace TheMovingCompanyAPI.Controllers
     {
         private readonly ILogger<OrdersController> _logger;
         private readonly IOrderService _orderService;
+        private readonly MockOrderData _mockData = new();
+
 
         public OrdersController(ILogger<OrdersController> logger, IOrderService orderService)
         {
@@ -21,7 +24,11 @@ namespace TheMovingCompanyAPI.Controllers
         [HttpGet(Name = "GetOrders")]
         public IEnumerable<Order> Get()
         {
-            return _orderService.GetOrders();
+            // TODO - don't add mock data when adding/udpating database is working as intended
+            var dbData = _orderService.GetOrders().ToList();
+            var mockData = _mockData.GetOrders();
+            mockData.AddRange(dbData);
+            return mockData;
         }
 
         [HttpPost(Name = "CreateOrder")]
@@ -31,10 +38,6 @@ namespace TheMovingCompanyAPI.Controllers
             try
             {
                 _orderService.CreateOrder(body.Order);
-                body.Services.ForEach(s =>
-                {
-                    _orderService.CreateService(s);
-                });
                 return Ok(new { message = "Order created" });
 
             }
@@ -51,7 +54,7 @@ namespace TheMovingCompanyAPI.Controllers
             // TODO - handle errors better
             try
             {
-                _orderService.UpdateOrder(body.Order);
+                _orderService.UpdateOrder(body.Order, id);
                 return Ok(new { message = "Order updated" });
 
             }

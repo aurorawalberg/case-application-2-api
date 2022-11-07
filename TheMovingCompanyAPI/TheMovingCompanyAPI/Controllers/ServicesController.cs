@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheMovingCompanyAPI.Entities;
+using TheMovingCompanyAPI.MockData;
 using TheMovingCompanyAPI.Services;
 
 namespace TheMovingCompanyAPI.Controllers
@@ -10,6 +11,8 @@ namespace TheMovingCompanyAPI.Controllers
     {
         private readonly ILogger<ServicesController> _logger;
         private readonly IOrderService _orderService;
+        private readonly MockOrderData _mockData = new();
+
 
         public ServicesController(ILogger<ServicesController> logger, IOrderService orderService)
         {
@@ -20,7 +23,11 @@ namespace TheMovingCompanyAPI.Controllers
         [HttpGet(Name = "GetServices")]
         public IEnumerable<Service> Get()
         {
-            return _orderService.GetServices();
+            // TODO - don't add mock data when adding/udpating database is working as intended
+            var dbData = _orderService.GetServices().ToList();
+            var mockData = _mockData.GetServices();
+            mockData.AddRange(dbData);
+            return mockData;
         }
 
         [HttpDelete("{id}", Name = "DeleteService")]

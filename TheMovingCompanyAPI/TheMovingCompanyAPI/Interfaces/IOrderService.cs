@@ -7,7 +7,7 @@ namespace TheMovingCompanyAPI.Services
     {
 
         public void CreateOrder(Order order);
-        public void UpdateOrder(Order order);
+        public void UpdateOrder(Order order, int id);
         public void DeleteOrder(int orderId);
         public void DeleteCustomer(int customerId);
         public void CreateService(Service service);

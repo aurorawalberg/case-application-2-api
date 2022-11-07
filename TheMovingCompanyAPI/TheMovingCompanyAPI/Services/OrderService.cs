@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TheMovingCompanyAPI.Entities;
+﻿using TheMovingCompanyAPI.Entities;
 using TheMovingCompanyAPI.Helpers;
-using TheMovingCompanyAPI.MockData;
-using TheMovingCompanyAPI.Models;
 
 namespace TheMovingCompanyAPI.Services
 {
@@ -10,7 +7,6 @@ namespace TheMovingCompanyAPI.Services
     {
         private readonly ILogger<OrderService> _logger;
         private readonly DataContext _context;
-        private readonly MockOrderData _mockData = new();
 
         public OrderService(ILogger<OrderService> logger, DataContext context)
         {
@@ -20,23 +16,17 @@ namespace TheMovingCompanyAPI.Services
 
         public IEnumerable<Order> GetOrders()
         {
-            // TODO - use context when fixed data structure issue
             return _context.Orders;
-            //return _mockData.GetOrders();
         }
 
         public IEnumerable<Customer> GetCustomers()
         {
-            // TODO - use context when fixed data structure issue
             return _context.Customers;
-            //return _mockData.GetCustomers();
         }
 
         public IEnumerable<Service> GetServices()
         {
-            // TODO - use context when fixed data structure issue
             return _context.Services;
-            //return _mockData.GetServices();
         }
 
         public void CreateOrder(Order order)
@@ -45,7 +35,7 @@ namespace TheMovingCompanyAPI.Services
             _context.SaveChanges();
         }
 
-        public void UpdateOrder(Order order)
+        public void UpdateOrder(Order order, int id)
         {
             _context.Orders.Update(order);
             _context.SaveChanges();
