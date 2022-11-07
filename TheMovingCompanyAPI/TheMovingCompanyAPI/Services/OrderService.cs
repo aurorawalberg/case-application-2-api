@@ -10,7 +10,7 @@ namespace TheMovingCompanyAPI.Services
         private readonly List<Order> _orders = new(){
                 new Order
                 {
-                    OrderId = 1,
+                    Id = 1,
                     CustomerId = 1,
                     FromAdress = "123 Main St",
                     ToAdress = "456 Main St",
@@ -19,7 +19,7 @@ namespace TheMovingCompanyAPI.Services
                 },
                 new Order
                 {
-                    OrderId = 2,
+                    Id = 2,
                     CustomerId = 1,
                     FromAdress = "123 Second St",
                     ToAdress = "456 Second St",
@@ -28,7 +28,7 @@ namespace TheMovingCompanyAPI.Services
                 },
                 new Order
                 {
-                    OrderId = 3,
+                    Id = 3,
                     CustomerId = 2,
                     FromAdress = "123 Third St",
                     ToAdress = "456 Third St",
@@ -37,7 +37,7 @@ namespace TheMovingCompanyAPI.Services
                 },
                 new Order
                 {
-                    OrderId = 4,
+                    Id = 4,
                     CustomerId = 3,
                     FromAdress = "123 Last St",
                     ToAdress = "456 Last St",
@@ -94,21 +94,21 @@ namespace TheMovingCompanyAPI.Services
         {
                 new Customer
                 {
-                    CustomerId = 1,
+                    Id = 1,
                     Name = "John Smith",
                     Email = "john.smith@gmail.com",
                     PhoneNumber = "+90 76772648"
                 },
                 new Customer
                 {
-                    CustomerId = 2,
+                    Id = 2,
                     Name = "John Andrews",
                     Email = "john.andrews@gmail.com",
                     PhoneNumber = "+90 76772648"
                 },
                 new Customer
                 {
-                    CustomerId = 3,
+                    Id = 3,
                     Name = "John Kelly",
                     Email = "john.kelly@gmail.com",
                     PhoneNumber = "+90 76772648"
@@ -168,7 +168,7 @@ namespace TheMovingCompanyAPI.Services
 
         private void CreateOrder(Order order)
         {
-            order.OrderId = NextOrderId;
+            order.Id = NextOrderId;
             NextOrderId++;
             _orders.Add(order);
         }
@@ -185,15 +185,15 @@ namespace TheMovingCompanyAPI.Services
 
         private void UpdateOrder(Order order)
         {
-            var orderToUpdate = _orders.Find(o => o.OrderId == order.OrderId);
-            DeleteOrder(order.OrderId);
+            var orderToUpdate = _orders.Find(o => o.Id == order.Id);
+            DeleteOrder(order.Id);
             CreateOrder(order);
         }
 
         private void UpdateCustomer(Customer customer)
         {
-            var customerToUpdate = _customers.Find(o => o.CustomerId == customer.CustomerId);
-            DeleteCustomer(customer.CustomerId);
+            var customerToUpdate = _customers.Find(c => c.Id == customer.Id);
+            DeleteCustomer(customer.Id);
             CreateCustomer(customer);
         }
 
@@ -206,13 +206,13 @@ namespace TheMovingCompanyAPI.Services
 
         private void DeleteOrder(int orderId)
         {
-            var order = _orders.Find(o => o.OrderId == orderId);
+            var order = _orders.Find(o => o.Id == orderId);
             _orders.Remove(order);
         }
 
         private void DeleteCustomer(int customerId)
         {
-            var customer = _customers.Find(s => s.CustomerId == customerId);
+            var customer = _customers.Find(c => c.Id == customerId);
             _customers.Remove(customer);
         }
 
