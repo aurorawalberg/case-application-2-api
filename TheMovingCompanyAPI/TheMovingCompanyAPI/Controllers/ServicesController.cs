@@ -24,7 +24,7 @@ namespace TheMovingCompanyAPI.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteService")]
-        public OkObjectResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             _orderService.DeleteService(id);
             return Ok(new { message = "Service deleted" });

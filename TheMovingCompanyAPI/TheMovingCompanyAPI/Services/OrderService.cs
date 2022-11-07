@@ -20,20 +20,23 @@ namespace TheMovingCompanyAPI.Services
 
         public IEnumerable<Order> GetOrders()
         {
-            //return _context.Customers;
-            return _mockData.GetOrders();
+            // TODO - use context when fixed data structure issue
+            return _context.Orders;
+            //return _mockData.GetOrders();
         }
 
         public IEnumerable<Customer> GetCustomers()
         {
-            //return _context.Customers;
-            return _mockData.GetCustomers();
+            // TODO - use context when fixed data structure issue
+            return _context.Customers;
+            //return _mockData.GetCustomers();
         }
 
         public IEnumerable<Service> GetServices()
         {
-            //return _context.Services;
-            return _mockData.GetServices();
+            // TODO - use context when fixed data structure issue
+            return _context.Services;
+            //return _mockData.GetServices();
         }
 
         public void CreateOrder(Order order)

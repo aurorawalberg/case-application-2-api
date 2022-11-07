@@ -25,25 +25,44 @@ namespace TheMovingCompanyAPI.Controllers
         }
 
         [HttpPost(Name = "CreateOrder")]
-        public OkObjectResult Post([FromBody] OrderRequest body)
+        public ActionResult Post([FromBody] OrderRequest body)
         {
-            _orderService.CreateOrder(body.Order);
-            body.Services.ForEach(s =>
+            // TODO - handle errors better
+            try
             {
-                _orderService.CreateService(s);
-            });
-            return Ok(new { message = "Order created" });
+                _orderService.CreateOrder(body.Order);
+                body.Services.ForEach(s =>
+                {
+                    _orderService.CreateService(s);
+                });
+                return Ok(new { message = "Order created" });
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = $"Error: {e.Message}" });
+
+            }
         }
 
         [HttpPut("{id}", Name = "UpdateOrder")]
-        public OkObjectResult Put(int id, [FromBody] OrderRequest body)
+        public ActionResult Put(int id, [FromBody] OrderRequest body)
         {
-            _orderService.UpdateOrder(body.Order);
-            return Ok(new { message = "Order updated" });
+            // TODO - handle errors better
+            try
+            {
+                _orderService.UpdateOrder(body.Order);
+                return Ok(new { message = "Order updated" });
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = $"Error: {e.Message}" });
+            }
         }
 
         [HttpDelete("{id}", Name = "DeleteOrder")]
-        public OkObjectResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             _orderService.DeleteOrder(id);
             return Ok(new { message = "Order deleted" });
