@@ -7,5 +7,6 @@
         public string FromAdress { get; set; }
         public string ToAdress { get; set; }
         public string Note { get; set; }
+        public DateTime Date { get; set; }
     }
 }

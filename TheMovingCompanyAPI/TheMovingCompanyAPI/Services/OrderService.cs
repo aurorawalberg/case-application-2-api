@@ -15,6 +15,7 @@ namespace TheMovingCompanyAPI.Services
                     FromAdress = "123 Main St",
                     ToAdress = "456 Main St",
                     Note = "This is a note",
+                    Date = DateTime.Now,
                 },
                 new Order
                 {
@@ -23,6 +24,7 @@ namespace TheMovingCompanyAPI.Services
                     FromAdress = "123 Second St",
                     ToAdress = "456 Second St",
                     Note = "This is a note",
+                    Date = DateTime.Now.AddDays(-1),
                 },
                 new Order
                 {
@@ -31,6 +33,7 @@ namespace TheMovingCompanyAPI.Services
                     FromAdress = "123 Third St",
                     ToAdress = "456 Third St",
                     Note = "This is a note",
+                    Date= DateTime.Now.AddDays(-2),
                 },
                 new Order
                 {
@@ -39,6 +42,7 @@ namespace TheMovingCompanyAPI.Services
                     FromAdress = "123 Last St",
                     ToAdress = "456 Last St",
                     Note = "This is a note",
+                    Date = DateTime.Now.AddDays(-3),
                 }
             };
         private readonly List<Service> _services = new()
@@ -47,37 +51,43 @@ namespace TheMovingCompanyAPI.Services
                 {
                     OrderId = 1,
                     ServiceType = "Moving",
-                    Date = DateTime.Now,
+                    Date = DateTime.Now.AddDays(2),
                 },
                 new Service
                 {
                     OrderId = 1,
                     ServiceType = "Packing",
-                    Date = DateTime.Now,
+                    Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
                     OrderId = 2,
                     ServiceType = "Moving",
-                    Date = DateTime.Now,
+                    Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
                     OrderId = 3,
                     ServiceType = "Cleaning",
-                    Date = DateTime.Now,
+                    Date = DateTime.Now.AddDays(3),
                 },
                 new Service
                 {
                     OrderId = 3,
                     ServiceType = "Moving",
-                    Date = DateTime.Now,
+                    Date = DateTime.Now.AddDays(1),
                 },
                 new Service
                 {
                     OrderId = 3,
-                    ServiceType = "Cleaning",
-                    Date = DateTime.Now,
+                    ServiceType = "Packing",
+                    Date = DateTime.Now.AddDays(1),
+                },
+                new Service
+                {
+                    OrderId = 4,
+                    ServiceType = "Moving",
+                    Date = DateTime.Now.AddDays(4),
                 }
             };
         private readonly List<Customer> _customers = new()
