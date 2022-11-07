@@ -262,3 +262,4 @@ C:\Users\auror\Documents\case-application-2-api\TheMovingCompanyAPI\TheMovingCom
 C:\Users\auror\Documents\case-application-2-api\TheMovingCompanyAPI\TheMovingCompanyAPI\obj\Debug\net6.0\TheMovingCompanyAPI.pdb
 C:\Users\auror\Documents\case-application-2-api\TheMovingCompanyAPI\TheMovingCompanyAPI\obj\Debug\net6.0\TheMovingCompanyAPI.genruntimeconfig.cache
 C:\Users\auror\Documents\case-application-2-api\TheMovingCompanyAPI\TheMovingCompanyAPI\obj\Debug\net6.0\ref\TheMovingCompanyAPI.dll
+C:\Users\auror\Documents\case-application-2-api\TheMovingCompanyAPI\TheMovingCompanyAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "g+zpezsTLh7JReDDVbiJOmO7gL0vDbryGNjrWF8bC942YRl5W2Qiu6mbNpBx+QD5yz1tJFGHHh7zAXDoY+scjA==",
+  "dgSpecHash": "Rn0zYGP6tafp+CVNGqPOm2vzhsfGkHziW3fGlEzIH+pqOU7bgw5R/4DRPEbVpcvycEQMAWE0s7BK3ZgleloctQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\auror\\Documents\\case-application-2-api\\TheMovingCompanyAPI\\TheMovingCompanyAPI\\TheMovingCompanyAPI.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,7 @@
     "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.10\\microsoft.entityframeworkcore.abstractions.6.0.10.nupkg.sha512",
     "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.10\\microsoft.entityframeworkcore.analyzers.6.0.10.nupkg.sha512",
     "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.10\\microsoft.entityframeworkcore.design.6.0.10.nupkg.sha512",
+    "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.10\\microsoft.entityframeworkcore.inmemory.6.0.10.nupkg.sha512",
     "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.10\\microsoft.entityframeworkcore.relational.6.0.10.nupkg.sha512",
     "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.10\\microsoft.entityframeworkcore.sqlserver.6.0.10.nupkg.sha512",
     "C:\\Users\\auror\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.10\\microsoft.entityframeworkcore.tools.6.0.10.nupkg.sha512",

@@ -1,225 +1,97 @@
-﻿using TheMovingCompanyAPI.Controllers;
+﻿using Microsoft.EntityFrameworkCore;
 using TheMovingCompanyAPI.Entities;
+using TheMovingCompanyAPI.Helpers;
 using TheMovingCompanyAPI.Models;
 
 namespace TheMovingCompanyAPI.Services
 {
     public class OrderService : IOrderService
     {
-
-        private readonly List<Order> _orders = new(){
-                new Order
-                {
-                    Id = 1,
-                    CustomerId = 1,
-                    FromAdress = "123 Main St",
-                    ToAdress = "456 Main St",
-                    Note = "This is a note",
-                    Date = DateTime.Now,
-                },
-                new Order
-                {
-                    Id = 2,
-                    CustomerId = 1,
-                    FromAdress = "123 Second St",
-                    ToAdress = "456 Second St",
-                    Note = "This is a note",
-                    Date = DateTime.Now.AddDays(-1),
-                },
-                new Order
-                {
-                    Id = 3,
-                    CustomerId = 2,
-                    FromAdress = "123 Third St",
-                    ToAdress = "456 Third St",
-                    Note = "This is a note",
-                    Date= DateTime.Now.AddDays(-2),
-                },
-                new Order
-                {
-                    Id = 4,
-                    CustomerId = 3,
-                    FromAdress = "123 Last St",
-                    ToAdress = "456 Last St",
-                    Note = "This is a note",
-                    Date = DateTime.Now.AddDays(-3),
-                }
-            };
-        private readonly List<Service> _services = new()
-            {
-                new Service
-                {
-                    OrderId = 1,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now.AddDays(2),
-                },
-                new Service
-                {
-                    OrderId = 1,
-                    ServiceType = "Packing",
-                    Date = DateTime.Now.AddDays(1),
-                },
-                new Service
-                {
-                    OrderId = 2,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now.AddDays(1),
-                },
-                new Service
-                {
-                    OrderId = 3,
-                    ServiceType = "Cleaning",
-                    Date = DateTime.Now.AddDays(3),
-                },
-                new Service
-                {
-                    OrderId = 3,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now.AddDays(1),
-                },
-                new Service
-                {
-                    OrderId = 3,
-                    ServiceType = "Packing",
-                    Date = DateTime.Now.AddDays(1),
-                },
-                new Service
-                {
-                    OrderId = 4,
-                    ServiceType = "Moving",
-                    Date = DateTime.Now.AddDays(4),
-                }
-            };
-        private readonly List<Customer> _customers = new()
-        {
-                new Customer
-                {
-                    Id = 1,
-                    Name = "John Smith",
-                    Email = "john.smith@gmail.com",
-                    PhoneNumber = "+90 76772648"
-                },
-                new Customer
-                {
-                    Id = 2,
-                    Name = "John Andrews",
-                    Email = "john.andrews@gmail.com",
-                    PhoneNumber = "+90 76772648"
-                },
-                new Customer
-                {
-                    Id = 3,
-                    Name = "John Kelly",
-                    Email = "john.kelly@gmail.com",
-                    PhoneNumber = "+90 76772648"
-                }
-            };
-
-        private int NextOrderId = 5;
         private readonly ILogger<OrderService> _logger;
+        private readonly DataContext _context;
 
-        public OrderService(ILogger<OrderService> logger)
+        public OrderService(ILogger<OrderService> logger, DataContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IEnumerable<Order> GetOrders()
         {
-            return _orders;
+            return _context.Orders;
         }
 
         public IEnumerable<Customer> GetCustomers()
         {
-            return _customers;
+            return _context.Customers;
         }
 
         public IEnumerable<Service> GetServices()
         {
-            return _services;
+            return _context.Services;
         }
 
-        public void ProccessCreateOrderRequest(OrderRequest orderRequest)
+        public void CreateOrder(Order order)
         {
-            CreateOrder(orderRequest.Order);
-            CreateCustomer(orderRequest.Customer);
-            orderRequest.Services.ForEach(service =>
-            {
-                CreateService(service);
-            });
+            _context.Orders.Add(order);
+            _context.SaveChanges();
         }
 
-        public void ProccessUpdateOrderRequest(OrderRequest orderRequest)
+        public void UpdateOrder(Order order)
         {
-            UpdateOrder(orderRequest.Order);
-            UpdateCustomer(orderRequest.Customer);
-
-            orderRequest.Services.ForEach(service =>
-            {
-                UpdateService(service);
-            });
+            _context.Orders.Update(order);
+            _context.SaveChanges();
         }
 
-        public void ProccessDeleteOrderRequest(int orderId)
+        public void DeleteOrder(int orderId)
         {
-            DeleteOrder(orderId);
-            DeleteCustomer(orderId);
-            DeleteService(orderId);
+            var order = GetOrder(orderId);
+
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
         }
 
-        private void CreateOrder(Order order)
+        public void DeleteCustomer(int customerId)
         {
-            order.Id = NextOrderId;
-            NextOrderId++;
-            _orders.Add(order);
+            var customer = GetCustomer(customerId);
+
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
         }
 
-        private void CreateService(Service service)
+        public void CreateService(Service service)
         {
-            _services.Add(service);
+            _context.Services.Add(service);
+            _context.SaveChanges();
         }
 
-        private void CreateCustomer(Customer customer)
+        public void DeleteService(int serviceId)
         {
-            _customers.Add(customer);
+            var service = GetService(serviceId);
+
+            _context.Services.Remove(service);
+            _context.SaveChanges();
         }
 
-        private void UpdateOrder(Order order)
+        private Order GetOrder(int id)
         {
-            var orderToUpdate = _orders.Find(o => o.Id == order.Id);
-            DeleteOrder(order.Id);
-            CreateOrder(order);
+            var order = _context.Orders.Find(id);
+            if (order == null) throw new KeyNotFoundException($"Order with id {id} not found");
+            return order;
         }
 
-        private void UpdateCustomer(Customer customer)
+        private Customer GetCustomer(int id)
         {
-            var customerToUpdate = _customers.Find(c => c.Id == customer.Id);
-            DeleteCustomer(customer.Id);
-            CreateCustomer(customer);
+            var customer = _context.Customers.Find(id);
+            if (customer == null) throw new KeyNotFoundException($"Customer with id {id} not found");
+            return customer;
         }
 
-        private void UpdateService(Service service)
+        private Service GetService(int id)
         {
-            var serviceToUpdate = _services.Find(s => s.OrderId == service.OrderId);
-            DeleteService(service.OrderId);
-            CreateService(service);
-        }
-
-        private void DeleteOrder(int orderId)
-        {
-            var order = _orders.Find(o => o.Id == orderId);
-            _orders.Remove(order);
-        }
-
-        private void DeleteCustomer(int customerId)
-        {
-            var customer = _customers.Find(c => c.Id == customerId);
-            _customers.Remove(customer);
-        }
-
-        private void DeleteService(int orderId)
-        {
-            var service = _services.Find(s => s.OrderId == orderId);
-            _services.Remove(service);
+            var service = _context.Services.Find(id);
+            if (service == null) throw new KeyNotFoundException($"Service with id {id} not found");
+            return service;
         }
     }
 }

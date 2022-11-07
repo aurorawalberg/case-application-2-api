@@ -4,8 +4,8 @@ namespace TheMovingCompanyAPI.Models
 {
     public class OrderRequest
     {
-        public Order Order { get; set; }
-        public List<Service> Services { get; set; }
-        public Customer Customer { get; set; }
+        public Order Order { get; set; } = null!;
+        public List<Service> Services { get; set; } = null!;
+        public Customer Customer { get; set; } = null!;
     }
 }

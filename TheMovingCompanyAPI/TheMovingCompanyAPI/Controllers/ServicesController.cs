@@ -22,5 +22,12 @@ namespace TheMovingCompanyAPI.Controllers
         {
             return _orderService.GetServices();
         }
+
+        [HttpDelete("{id}", Name = "DeleteService")]
+        public OkObjectResult Delete(int id)
+        {
+            _orderService.DeleteService(id);
+            return Ok(new { message = "Service deleted" });
+        }
     }
 }

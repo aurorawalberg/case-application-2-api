@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using TheMovingCompanyAPI.Entities;
 using TheMovingCompanyAPI.Models;
 using TheMovingCompanyAPI.Services;
@@ -28,21 +27,25 @@ namespace TheMovingCompanyAPI.Controllers
         [HttpPost(Name = "CreateOrder")]
         public OkObjectResult Post([FromBody] OrderRequest body)
         {
-            _orderService.ProccessCreateOrderRequest(body);
+            _orderService.CreateOrder(body.Order);
+            body.Services.ForEach(s =>
+            {
+                _orderService.CreateService(s);
+            });
             return Ok(new { message = "Order created" });
         }
 
         [HttpPut("{id}", Name = "UpdateOrder")]
         public OkObjectResult Put(int id, [FromBody] OrderRequest body)
         {
-            _orderService.ProccessUpdateOrderRequest(body);
+            _orderService.UpdateOrder(body.Order);
             return Ok(new { message = "Order updated" });
         }
 
         [HttpDelete("{id}", Name = "DeleteOrder")]
         public OkObjectResult Delete(int id)
         {
-            _orderService.ProccessDeleteOrderRequest(id);
+            _orderService.DeleteOrder(id);
             return Ok(new { message = "Order deleted" });
         }
     }
