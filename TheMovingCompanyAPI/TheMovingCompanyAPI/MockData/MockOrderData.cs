@@ -11,7 +11,7 @@ namespace TheMovingCompanyAPI.MockData
                     CustomerId = 1,
                     FromAdress = "123 Main St",
                     ToAdress = "456 Main St",
-                    Note = "This is a note",
+                    Note = "Third floor",
                     Date = DateTime.Now,
                 },
                 new Order
@@ -20,7 +20,7 @@ namespace TheMovingCompanyAPI.MockData
                     CustomerId = 2,
                     FromAdress = "123 Second St",
                     ToAdress = "456 Second St",
-                    Note = "This is a note",
+                    Note = "First floor",
                     Date = DateTime.Now.AddDays(-1),
                 },
                 new Order
@@ -29,7 +29,7 @@ namespace TheMovingCompanyAPI.MockData
                     CustomerId = 3,
                     FromAdress = "123 Third St",
                     ToAdress = "456 Third St",
-                    Note = "This is a note",
+                    Note = "Locked apartment building",
                     Date= DateTime.Now.AddDays(-2),
                 },
                 new Order
@@ -38,7 +38,7 @@ namespace TheMovingCompanyAPI.MockData
                     CustomerId = 4,
                     FromAdress = "123 Last St",
                     ToAdress = "456 Last St",
-                    Note = "This is a note",
+                    Note = "No parking",
                     Date = DateTime.Now.AddDays(-3),
                 }
             };
